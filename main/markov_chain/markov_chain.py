@@ -102,7 +102,7 @@ Sincerely yours, Stan—P.S. We should be together too
 chain = MarkovChain()
 chain.train(text)
 
-sample = "I ain't"
+sample = "You"
 
 result = chain.generate(sample)
 
