@@ -2,7 +2,7 @@ from string import punctuation
 from collections import Counter
 from collections import defaultdict
 
-post_comments_with_labels = [
+post_comments_with_labels = [  # 1 = positive, 0 = negative
     ("I love this post.", "1"),
     ("This post is your best work.", "1"),
     ("I really liked this post.", "1"),
@@ -42,6 +42,17 @@ class NaiveBayesClassifier:
         pos = []
         neg = []
 
+        for token in tokens:
+            pos.append(self.pos_counter[token]/self.sample_count)
+            neg.append(self.neg_counter[token]/self.sample_count)
+
+        if sum(pos) > sum(neg):
+            return "positive"
+        elif sum(neg) > sum(pos):
+            return "negative"
+        else:
+            return "neutral"
+
 
 cl = NaiveBayesClassifier(post_comments_with_labels)
 
@@ -54,4 +65,5 @@ def get_sentiment(text):
     return cl.classify(text)
 
 
-print("1 is positive, 0 is negative")
+text = "I hate"
+print(text, "\n", get_sentiment(text))
