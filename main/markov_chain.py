@@ -22,19 +22,19 @@ class MarkovChain:
             self.graph[token].append(tokens[i + 1])
 
     def generate(self, prompt, length=10):
-        # get the last token from the prompt
-        current = self._tokenize(prompt)[-1]
+
+        current = self._tokenize(prompt)[-1]  # get the last token from the prompt
         # initialize the output
         output = prompt
         for i in range(length):
-            # look up the options in the graph dictionary
-            options = self.graph.get(current, [])
+
+            options = self.graph.get(current, [])  # look up the options in the graph dictionary
             if not options:
                 continue
-            # use random.choice method to pick a current option
-            current = random.choice(options)
-            # add the random choice to the output string
-            output += f" {current}"
+
+            current = random.choice(options)  # use random.choice method to pick a current option
+
+            output += f" {current}"  # add the random choice to the output string
 
         return output
 
